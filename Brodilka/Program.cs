@@ -50,8 +50,8 @@
                 }
 
                 DrawBar(health, maxHealth);
-                int randX = rand.Next(1, 19);
-                int randY = rand.Next(1, 22);
+                int randX;
+                int randY;
                 Console.SetCursorPosition(0, 20);
                 Console.Write("Наш bag: ");
                 for (int i = 0; i < bag.Length; i++)
@@ -129,18 +129,27 @@
                     }
                     tempBag[tempBag.Length - 2] = 'X';
                     bag = tempBag;
-                    while (isStart)
+                    while (true)
                     {
-                        if (map[randX, randY] != '#')
+                        randX = rand.Next(1, 19);
+                        randY = rand.Next(1, 22);
+                        while (true)
                         {
-                            map[randX, randY] = 'X';
+                            if (map[randX, randY] == '#')
+                            {
+                                break; 
+                            }
+                            else
+                            {
+                                map[randX, randY] = 'X';
+                                break;
+                            }
+                            
+                        }
+                        if (map[randX, randY] == 'X')
+                        {
                             break;
                         }
-                        else
-                        {
-                            break;
-                        }
-
                     }
                 }
                 if (map[playerX, playerY] == '*')
